@@ -1,0 +1,42 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		int[] arr= {10,20,30,50,60,5};
+		LargestThree(arr);
+	}
+
+	public static void LargestThree(int[] arr) {
+		if(arr.length < 3) {
+			System.out.println("Array should have atleast three distinct elements");
+			return;
+		}
+		int first = Integer.MIN_VALUE;
+		int second = Integer.MIN_VALUE;
+		int third = Integer.MIN_VALUE;
+
+		for(int num : arr) {
+			if(num > first) {
+				third = second;
+				second = first;
+				first = num;
+			}
+			else if(num>second && num!=first) {
+				third = second;
+				second = num;
+			}
+			else if(num >third && num!=first && num!=second) {
+				third=num;
+			}
+
+		}
+		if (third == Integer.MIN_VALUE) {
+			System.out.println("There is no 3 distinct value in this Array");
+		}
+		else {
+			System.out.println("The 3 distinct values are "+first+","+second+","+third);
+		}
+
+	}
+}
+
