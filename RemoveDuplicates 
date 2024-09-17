@@ -1,0 +1,44 @@
+public class RemoveDuplicatesInPlace {
+    public static void main(String[] args) {
+        // Initialize an array with duplicate elements
+        int[] numbers = {1, 2, 3, 2, 4, 1, 5, 3};
+
+        // Call function to remove duplicates in-place
+        int newLength = removeDuplicatesInPlace(numbers);
+
+        // Output the result
+        System.out.print("Array after removing duplicates: ");
+        for (int i = 0; i < newLength; i++) {
+            System.out.print(numbers[i] + " ");
+        }
+    }
+
+    // Function to remove duplicates in-place and return new length of array
+    public static int removeDuplicatesInPlace(int[] arr) {
+        if (arr.length == 0) {
+            return 0;
+        }
+
+        // Index to place unique elements
+        int i = 0;
+
+        // Traverse through the array
+        for (int j = 1; j < arr.length; j++) {
+            // If current element is unique, move it to index i
+            boolean isUnique = true;
+            for (int k = 0; k <= i; k++) {
+                if (arr[k] == arr[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                i++;
+                arr[i] = arr[j];
+            }
+        }
+
+        // Return the new length of the array containing unique elements
+        return i + 1;
+    }
+}
