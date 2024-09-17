@@ -1,44 +1,48 @@
-public class RemoveDuplicatesInPlace {
+import java.util.Arrays;
+
+public class RemoveDuplicatesWithoutSet {
     public static void main(String[] args) {
         // Initialize an array with duplicate elements
         int[] numbers = {1, 2, 3, 2, 4, 1, 5, 3};
 
-        // Call function to remove duplicates in-place
-        int newLength = removeDuplicatesInPlace(numbers);
+        // Call function to remove duplicates
+        int[] uniqueNumbers = removeDuplicatesWithoutSet(numbers);
 
         // Output the result
-        System.out.print("Array after removing duplicates: ");
-        for (int i = 0; i < newLength; i++) {
-            System.out.print(numbers[i] + " ");
-        }
+        System.out.println("Array after removing duplicates: " + Arrays.toString(uniqueNumbers));
     }
 
-    // Function to remove duplicates in-place and return new length of array
-    public static int removeDuplicatesInPlace(int[] arr) {
+    // Function to remove duplicates manually
+    public static int[] removeDuplicatesWithoutSet(int[] arr) {
+        // Check for empty array
         if (arr.length == 0) {
-            return 0;
+            return new int[0];
         }
 
-        // Index to place unique elements
-        int i = 0;
+        // Sort the array to group duplicates together
+        Arrays.sort(arr);
 
-        // Traverse through the array
-        for (int j = 1; j < arr.length; j++) {
-            // If current element is unique, move it to index i
-            boolean isUnique = true;
-            for (int k = 0; k <= i; k++) {
-                if (arr[k] == arr[j]) {
-                    isUnique = false;
-                    break;
-                }
-            }
-            if (isUnique) {
-                i++;
-                arr[i] = arr[j];
+        // Create a temporary array to store unique elements
+        int[] temp = new int[arr.length];
+        int j = 0; // Index to store unique elements
+
+        // Traverse the sorted array and store unique elements in the temporary array
+        for (int i = 0; i < arr.length - 1; i++) {
+            // If the current element is not equal to the next element, store it
+            if (arr[i] != arr[i + 1]) {
+                temp[j++] = arr[i];
             }
         }
 
-        // Return the new length of the array containing unique elements
-        return i + 1;
+        // Store the last element (since the loop runs until second-last element)
+        temp[j++] = arr[arr.length - 1];
+
+        // Create a new array with the exact size of unique elements
+        int[] result = new int[j];
+        for (int i = 0; i < j; i++) {
+            result[i] = temp[i];
+        }
+
+        return result;
     }
 }
