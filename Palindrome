@@ -1,0 +1,36 @@
+public class ArrayPalindromeCheck {
+    public static void main(String[] args) {
+        // Initialize an array
+        int[] numbers = {1, 2, 3, 2, 1};
+
+        // Check if the array is palindrome
+        boolean isPalindrome = checkPalindrome(numbers);
+
+        // Output the result
+        if (isPalindrome) {
+            System.out.println("The array is a palindrome.");
+        } else {
+            System.out.println("The array is not a palindrome.");
+        }
+    }
+
+    // Function to check if an array is palindrome
+    public static boolean checkPalindrome(int[] arr) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        // Loop to compare elements from start and end
+        while (start < end) {
+            // If elements at start and end are not equal, it's not a palindrome
+            if (arr[start] != arr[end]) {
+                return false;
+            }
+            // Move pointers
+            start++;
+            end--;
+        }
+
+        // If all elements match, it's a palindrome
+        return true;
+    }
+}
